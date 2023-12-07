@@ -1,0 +1,21 @@
+### [C]reate user
+POST localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Anakin",
+  "lastName": "Skywalker",
+  "email": "anakin.skywalker@gmail.com",
+  "password": "padme66",
+  "confirmPassword": "padme66",
+  "avatar": "https://w0.peakpx.com/wallpaper/72/347/HD-wallpaper-star-wars-anakin-skywalker-darth-vader-sith-star-wars.jpg"
+}
+
+### Login user
+POST localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "anakin.skywalker@gmail.com",
+  "password": "padme66"
+}
