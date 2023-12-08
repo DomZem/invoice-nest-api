@@ -1,0 +1,60 @@
+import { Injectable } from '@nestjs/common';
+import { DatabaseService } from '../database/database.service';
+import { Invoice, Prisma } from '@prisma/client';
+
+@Injectable()
+export class InvoiceService {
+  constructor(private databaseService: DatabaseService) {}
+
+  async findUnique(
+    invoiceWhereUniqueInput: Prisma.InvoiceWhereUniqueInput,
+    invoiceInclude?: Prisma.InvoiceInclude,
+  ): Promise<Invoice | null> {
+    return this.databaseService.invoice.findUnique({
+      where: invoiceWhereUniqueInput,
+      include: invoiceInclude,
+    });
+  }
+
+  async findMany(params: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.InvoiceWhereUniqueInput;
+    where?: Prisma.InvoiceWhereInput;
+    include?: Prisma.InvoiceInclude;
+    orderBy?: Prisma.InvoiceOrderByWithRelationInput;
+  }): Promise<Invoice[]> {
+    const { skip, take, cursor, where, include, orderBy } = params;
+    return this.databaseService.invoice.findMany({
+      skip,
+      take,
+      cursor,
+      where,
+      include,
+      orderBy,
+    });
+  }
+
+  async create(data: Prisma.InvoiceCreateInput): Promise<Invoice> {
+    return this.databaseService.invoice.create({ data });
+  }
+
+  async update(params: {
+    where: Prisma.InvoiceWhereUniqueInput;
+    data: Prisma.InvoiceUpdateInput;
+    include?: Prisma.InvoiceInclude;
+  }): Promise<Invoice> {
+    const { where, data, include } = params;
+    return this.databaseService.invoice.update({
+      data,
+      where,
+      include,
+    });
+  }
+
+  async delete(where: Prisma.InvoiceWhereUniqueInput): Promise<Invoice> {
+    return this.databaseService.invoice.delete({
+      where,
+    });
+  }
+}

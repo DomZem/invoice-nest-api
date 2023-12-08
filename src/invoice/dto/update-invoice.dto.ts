@@ -9,48 +9,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { INVOICE_STATUS, PAYMENT_TERM } from '@prisma/client';
-
-export class UpdateInvoiceDto {
-  @IsNumber()
-  id: number;
-
-  @IsString()
-  mark: string;
-
-  @IsString()
-  clientName: string;
-
-  @IsEmail()
-  clientEmail: string;
-
-  @IsDateString()
-  date: Date;
-
-  @IsEnum(INVOICE_STATUS)
-  status: INVOICE_STATUS;
-
-  @IsEnum(PAYMENT_TERM)
-  paymentTerm: PAYMENT_TERM;
-
-  @IsString()
-  projectDescription: string;
-
-  @ValidateNested()
-  billFromAddress: UpdateAddressDto;
-
-  @ValidateNested()
-  billToAddress: UpdateAddressDto;
-
-  @IsArray()
-  @ArrayMinSize(1)
-  @ValidateNested({ each: true })
-  items: UpdateItemDto[];
-}
+import { Type } from 'class-transformer';
 
 export class UpdateAddressDto {
-  @IsNumber()
-  id: number;
-
   @IsString()
   streetName: string;
 
@@ -76,4 +37,41 @@ export class UpdateItemDto {
 
   @IsNumber()
   quantity: number;
+}
+
+export class UpdateInvoiceDto {
+  @IsString()
+  mark: string;
+
+  @IsString()
+  clientName: string;
+
+  @IsEmail()
+  clientEmail: string;
+
+  @IsDateString()
+  date: Date;
+
+  @IsEnum(INVOICE_STATUS)
+  status: INVOICE_STATUS;
+
+  @IsEnum(PAYMENT_TERM)
+  paymentTerm: PAYMENT_TERM;
+
+  @IsString()
+  projectDescription: string;
+
+  @ValidateNested({ each: true })
+  @Type(() => UpdateAddressDto)
+  billFromAddress: UpdateAddressDto;
+
+  @ValidateNested({ each: true })
+  @Type(() => UpdateAddressDto)
+  billToAddress: UpdateAddressDto;
+
+  @IsArray()
+  @ArrayMinSize(1)
+  @ValidateNested({ each: true })
+  @Type(() => UpdateItemDto)
+  items: UpdateItemDto[];
 }

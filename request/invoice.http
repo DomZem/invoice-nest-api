@@ -1,0 +1,91 @@
+### [C]reate invoice
+POST localhost:3000/invoice
+Content-Type: application/json
+
+{
+  "mark": "JSX928",
+  "clientName": "Ahsoka",
+  "clientEmail": "ahsoka.tano@gmail.com",
+  "date": "2019-07-04T13:33:03.969Z",
+  "status": "DRAFT",
+  "paymentTerm": "NET_7",
+  "projectDescription": "New lightsabers",
+  "billFromAddress": {
+    "streetName": "3 Small Heath",
+    "city": "Birmingham",
+    "postCode": "Z2 E2X",
+    "country": "United Kingdom"
+  },
+  "billToAddress": {
+    "streetName": "19 Union Terrace",
+    "city": "London",
+    "postCode": "ZU 7NW",
+    "country": "United Kingdom"
+  },
+  "items": [
+    {
+      "name": "Clothes",
+      "price": 144,
+      "quantity": 1
+    },
+    {
+      "name": "Lightsaber",
+      "price": 26,
+      "quantity": 2
+    }
+  ]
+}
+
+### [R]ead invoice
+GET localhost:3000/invoice/1
+
+### [R]ead all user invoices
+GET localhost:3000/invoice
+
+### [U]pdate invoice status
+PUT localhost:3000/invoice/1
+Content-Type: application/json
+
+{
+  "status": "PENDING"
+}
+
+### [U]pdate invoice
+PATCH localhost:3000/invoice/1
+Content-Type: application/json
+
+{
+  "mark": "JSX928",
+  "clientName": "Ahsoka",
+  "clientEmail": "ahsoka.tano@gmail.com",
+  "date": "2019-07-04T13:33:03.969Z",
+  "status": "PAID",
+  "paymentTerm": "NET_30",
+  "projectDescription": "New lightsabers",
+  "billFromAddress": {
+    "id": 1,
+    "streetName": "4 Small Heath",
+    "city": "Birmingham",
+    "postCode": "Z2 E2X",
+    "country": "United Kingdom"
+  },
+  "billToAddress": {
+    "id": 2,
+    "streetName": "19 Union Terrace",
+    "city": "London",
+    "postCode": "ZU 7NW",
+    "country": "United Kingdom"
+  },
+  "items": [
+    {
+      "id": 2,
+      "name": "Lightsaber",
+      "price": 26,
+      "quantity": 2
+    }
+  ]
+}
+
+### [D]elete invoice
+DELETE localhost:3000/invoice/1
+
