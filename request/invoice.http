@@ -63,14 +63,12 @@ Content-Type: application/json
   "paymentTerm": "NET_30",
   "projectDescription": "New lightsabers",
   "billFromAddress": {
-    "id": 1,
     "streetName": "4 Small Heath",
     "city": "Birmingham",
     "postCode": "Z2 E2X",
     "country": "United Kingdom"
   },
   "billToAddress": {
-    "id": 2,
     "streetName": "19 Union Terrace",
     "city": "London",
     "postCode": "ZU 7NW",
@@ -78,7 +76,6 @@ Content-Type: application/json
   },
   "items": [
     {
-      "id": 2,
       "name": "Lightsaber",
       "price": 26,
       "quantity": 2

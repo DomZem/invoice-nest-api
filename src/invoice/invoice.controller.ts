@@ -14,12 +14,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
-import { CreateInvoiceDto } from './dto/create-invoice.dto';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { DatabaseService } from '../database/database.service';
 import { UpdateInvoiceStatusDto } from './dto/update-invoice-status.dto';
-import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 import { Prisma } from '@prisma/client';
+import { CreateUpdateInvoiceDto } from './dto/create-update-invoice.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('invoice')
@@ -44,7 +43,7 @@ export class InvoiceController {
       billFromAddress,
       billToAddress,
       items,
-    }: CreateInvoiceDto,
+    }: CreateUpdateInvoiceDto,
   ) {
     const searchBillFromAddress =
       await this.createOrReturnAddress(billFromAddress);
@@ -117,11 +116,11 @@ export class InvoiceController {
     return invoice;
   }
 
-  @Patch(':id')
+  @Put(':id')
   async update(
     @Req() req,
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateInvoiceDto: UpdateInvoiceDto,
+    @Body() updateInvoiceDto: CreateUpdateInvoiceDto,
   ) {
     const invoiceToUpdate = await this.invoiceService.findUnique({ id });
 
@@ -180,7 +179,7 @@ export class InvoiceController {
     });
   }
 
-  @Put(':id')
+  @Patch(':id')
   async updateStatus(
     @Req() req,
     @Param('id', ParseIntPipe) id: number,

@@ -1,6 +1,6 @@
 import { PickType } from '@nestjs/mapped-types';
-import { UpdateInvoiceDto } from './update-invoice.dto';
+import { CreateUpdateInvoiceDto } from './create-update-invoice.dto';
 
-export class UpdateInvoiceStatusDto extends PickType(UpdateInvoiceDto, [
+export class UpdateInvoiceStatusDto extends PickType(CreateUpdateInvoiceDto, [
   'status',
 ] as const) {}

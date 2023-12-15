@@ -11,7 +11,7 @@ import {
 import { INVOICE_STATUS, PAYMENT_TERM } from '@prisma/client';
 import { Type } from 'class-transformer';
 
-export class UpdateAddressDto {
+export class CreateUpdateAddressDto {
   @IsString()
   streetName: string;
 
@@ -25,10 +25,7 @@ export class UpdateAddressDto {
   country: string;
 }
 
-export class UpdateItemDto {
-  @IsNumber()
-  id: number;
-
+export class CreateUpdateItemDto {
   @IsString()
   name: string;
 
@@ -39,7 +36,7 @@ export class UpdateItemDto {
   quantity: number;
 }
 
-export class UpdateInvoiceDto {
+export class CreateUpdateInvoiceDto {
   @IsString()
   mark: string;
 
@@ -62,16 +59,16 @@ export class UpdateInvoiceDto {
   projectDescription: string;
 
   @ValidateNested({ each: true })
-  @Type(() => UpdateAddressDto)
-  billFromAddress: UpdateAddressDto;
+  @Type(() => CreateUpdateAddressDto)
+  billFromAddress: CreateUpdateAddressDto;
 
   @ValidateNested({ each: true })
-  @Type(() => UpdateAddressDto)
-  billToAddress: UpdateAddressDto;
+  @Type(() => CreateUpdateAddressDto)
+  billToAddress: CreateUpdateAddressDto;
 
   @IsArray()
   @ArrayMinSize(1)
   @ValidateNested({ each: true })
-  @Type(() => UpdateItemDto)
-  items: UpdateItemDto[];
+  @Type(() => CreateUpdateItemDto)
+  items: CreateUpdateItemDto[];
 }
