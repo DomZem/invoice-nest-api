@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
 import { Invoice, Prisma } from '@prisma/client';
+import { generateRandomString } from '../utility/generateRandomString';
 
 @Injectable()
 export class InvoiceService {
@@ -56,5 +57,21 @@ export class InvoiceService {
     return this.databaseService.invoice.delete({
       where,
     });
+  }
+
+  async generateMark(): Promise<string> {
+    const mark = generateRandomString();
+
+    const isExist = await this.databaseService.invoice.findUnique({
+      where: {
+        mark,
+      },
+    });
+
+    if (isExist) {
+      await this.generateMark();
+    }
+
+    return mark;
   }
 }

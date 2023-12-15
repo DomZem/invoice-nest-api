@@ -18,7 +18,8 @@ import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { DatabaseService } from '../database/database.service';
 import { UpdateInvoiceStatusDto } from './dto/update-invoice-status.dto';
 import { Prisma } from '@prisma/client';
-import { CreateUpdateInvoiceDto } from './dto/create-update-invoice.dto';
+import { CreateInvoiceDto } from './dto/create-invoice.dto';
+import { UpdateInvoiceDto } from './dto/update-invoice.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('invoice')
@@ -33,7 +34,6 @@ export class InvoiceController {
     @Req() req,
     @Body()
     {
-      mark,
       clientName,
       clientEmail,
       date,
@@ -43,11 +43,13 @@ export class InvoiceController {
       billFromAddress,
       billToAddress,
       items,
-    }: CreateUpdateInvoiceDto,
+    }: CreateInvoiceDto,
   ) {
     const searchBillFromAddress =
       await this.createOrReturnAddress(billFromAddress);
     const searchBillToAddress = await this.createOrReturnAddress(billToAddress);
+
+    const mark = await this.invoiceService.generateMark();
 
     return this.invoiceService.create({
       mark,
@@ -120,7 +122,7 @@ export class InvoiceController {
   async update(
     @Req() req,
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateInvoiceDto: CreateUpdateInvoiceDto,
+    @Body() updateInvoiceDto: UpdateInvoiceDto,
   ) {
     const invoiceToUpdate = await this.invoiceService.findUnique({ id });
 

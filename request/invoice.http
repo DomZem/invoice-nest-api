@@ -3,7 +3,6 @@ POST localhost:3000/invoice
 Content-Type: application/json
 
 {
-  "mark": "JSX928",
   "clientName": "Ahsoka",
   "clientEmail": "ahsoka.tano@gmail.com",
   "date": "2019-07-04T13:33:03.969Z",
@@ -50,12 +49,14 @@ Content-Type: application/json
   "status": "PENDING"
 }
 
+
 ### [U]pdate invoice
+### You have to provide mark from the create action
 PATCH localhost:3000/invoice/1
 Content-Type: application/json
 
 {
-  "mark": "JSX928",
+  "mark": "",
   "clientName": "Ahsoka",
   "clientEmail": "ahsoka.tano@gmail.com",
   "date": "2019-07-04T13:33:03.969Z",

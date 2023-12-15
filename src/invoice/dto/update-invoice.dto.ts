@@ -36,7 +36,7 @@ export class CreateUpdateItemDto {
   quantity: number;
 }
 
-export class CreateUpdateInvoiceDto {
+export class UpdateInvoiceDto {
   @IsString()
   mark: string;
 

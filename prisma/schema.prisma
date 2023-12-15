@@ -32,7 +32,7 @@ model Address {
 
 model Invoice {
   id                 Int            @id @default(autoincrement())
-  mark               String         @db.VarChar(25)
+  mark               String         @unique @db.VarChar(25)
   clientName         String         @db.VarChar(50)
   clientEmail        String
   date               DateTime       @db.Date
