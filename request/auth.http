@@ -19,3 +19,6 @@ Content-Type: application/json
   "email": "anakin.skywalker@gmail.com",
   "password": "padme66"
 }
+
+### Logout
+GET localhost:3000/auth/logout

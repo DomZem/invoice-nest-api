@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -49,5 +50,12 @@ export class AuthController {
     delete user.password;
 
     return user;
+  }
+
+  @Get('logout')
+  async logout(@Res() res: Response) {
+    await this.authService.clearAuthToken(res);
+
+    return res.json({ message: 'Logged out' });
   }
 }

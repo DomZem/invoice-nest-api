@@ -51,6 +51,14 @@ export class AuthService {
     };
   }
 
+  async clearAuthToken(res: Response): Promise<void> {
+    // Clear cookie in client
+    res.clearCookie('access_token', {
+      domain: this.configService.get<string>('DOMAIN'),
+      httpOnly: true,
+    });
+  }
+
   async validateUser(userId: number): Promise<User> {
     return this.userService.findUnique({ id: userId });
   }
