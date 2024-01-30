@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
+import { DatabaseExceptionFilter } from './common/filter/database-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +14,8 @@ async function bootstrap() {
 
   app.use(helmet());
   app.use(cookieParser());
+  app.useGlobalFilters(new DatabaseExceptionFilter());
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
