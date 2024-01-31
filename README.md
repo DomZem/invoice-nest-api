@@ -33,13 +33,13 @@ To run this project, you will need to add the following environment variables to
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/DomZem/invoice-nest-api.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd invoice-nest-api
 ```
 
 Install dependencies
